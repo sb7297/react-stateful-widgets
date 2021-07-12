@@ -16,13 +16,30 @@ export default function Todos() {
     textDecoration: 'line-through'
   };
 
+  const toggleComplete = id => {
+    setTodos(todos.map(item => {
+      if (item.id === id) {
+        const ret = { ...item };
+        ret.complete = !ret.complete;
+        return ret;
+      } else {
+        return item;
+      }
+    }));
+  };
+
 	return (
 		<div className='widget-todos container'>
       <h2>Todos</h2> 
       <div className='todos'>
         {
           todos.map(item => 
-            <div className='todo' key={item.id} style={item.complete ? completeStyle : incompleteStyle}>
+            <div
+            className='todo'
+            key={item.id}
+            style={item.complete ? completeStyle : incompleteStyle}
+            >
+              <span style={ {cursor: 'pointer'} } onClick={() => toggleComplete(item.id)}>➼ </span> 
               {item.text}
             </div>
           )
