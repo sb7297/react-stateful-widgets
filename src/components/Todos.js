@@ -44,6 +44,7 @@ export default function Todos() {
       text: inputValue,
       complete: false
     }]);
+    setInputValue('');
   }
 
 	return (
@@ -64,7 +65,7 @@ export default function Todos() {
         }
       </div>
       <div className='todoInput'>
-        <input type='text' onChange={evt => setInputValue(evt.target.value)}/>
+        <input type='text' onChange={evt => setInputValue(evt.target.value)} value={inputValue} />
         <button onClick={addTodo}>Create</button>
       </div>
 		</div>
