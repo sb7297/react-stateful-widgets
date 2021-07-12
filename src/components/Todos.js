@@ -6,6 +6,8 @@ export default function Todos() {
     {id: 2, text: 'Finish Todos stretch goal', complete: false}
   ]);
 
+  const [inputValue, setInputValue] = useState('');
+
   const incompleteStyle = {
     margin: '0.5em',
     color: 'red',
@@ -28,6 +30,22 @@ export default function Todos() {
     }));
   };
 
+  const nextId = () => {
+    let maxId = 0;
+    todos.forEach(item => {
+      maxId = item.id > maxId ? item.id : maxId;
+    });
+    return maxId+1;
+  };
+
+  const addTodo = () => {
+    setTodos([ ...todos, {
+      id: nextId(),
+      text: inputValue,
+      complete: false
+    }]);
+  }
+
 	return (
 		<div className='widget-todos container'>
       <h2>Todos</h2> 
@@ -44,6 +62,10 @@ export default function Todos() {
             </div>
           )
         }
+      </div>
+      <div className='todoInput'>
+        <input type='text' onChange={evt => setInputValue(evt.target.value)}/>
+        <button onClick={addTodo}>Create</button>
       </div>
 		</div>
 	);
